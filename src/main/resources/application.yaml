@@ -1,0 +1,43 @@
+
+spring:
+  rabbitmq:
+    addresses: 127.0.0.1
+    username: guest
+    password: guest
+    virtual-host: /
+    connection-timeout: 15000s
+    listener:
+      simple:
+        concurrency: 5
+        #手工签收
+        acknowledge-mode: manual
+        max-concurrency: 10
+        prefetch: 1
+      order:
+        queue:
+          name: queue-2
+          durable: true
+        exchange:
+          name: exchange-2
+          durable: true
+          type: topic
+          ignoreDeclarationExceptions: true
+        key: springboot.*
+
+
+
+  http:
+    encoding:
+      charset: UTF-8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+
+server:
+  servlet:
+    context-path: /
+  port: 8002
+
+
